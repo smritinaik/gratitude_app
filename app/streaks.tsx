@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  View,
-} from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import { getAllGratitudes } from "../utils/storage";
-
 import {
   calculateCurrentStreak,
   calculateBestStreak,
@@ -39,209 +34,248 @@ export default function StreaksScreen() {
   );
 
   const progress =
-    currentStreak >= nextGoal
-      ? 100
-      : (currentStreak / nextGoal) * 100;
+    nextGoal === 0 ? 0 : Math.min((currentStreak / nextGoal) * 100, 100);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "#F4FFF6",
-        padding: 20,
-      }}
-    >
-      {/* Header */}
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 10,
-          marginTop: 10,
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#E1EFE6" }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingTop: 20,
+          paddingBottom: 40,
         }}
       >
-        <Ionicons
-          name="flame-outline"
-          size={30}
-          color="#FF7A00"
-        />
-
-        <Text
-          style={{
-            fontSize: 28,
-            fontWeight: "700",
-            color: "#1B4332",
-          }}
-        >
-          Streaks
-        </Text>
-      </View>
-
-      {/* Current Streak */}
-      <View
-        style={{
-          backgroundColor: "#FFFFFF",
-          marginTop: 30,
-          padding: 24,
-          borderRadius: 24,
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            color: "#6B7280",
-            fontSize: 16,
-          }}
-        >
-          Current Streak
-        </Text>
-
-        <Text
-          style={{
-            fontSize: 52,
-            fontWeight: "700",
-            color: "#1B4332",
-            marginTop: 8,
-          }}
-        >
-          {currentStreak}
-        </Text>
-
-        <Text
-          style={{
-            color: "#6B7280",
-            marginTop: 4,
-          }}
-        >
-          Days
-        </Text>
-      </View>
-
-      {/* Best + Goal */}
-      <View
-        style={{
-          flexDirection: "row",
-          gap: 12,
-          marginTop: 20,
-        }}
-      >
+        {/* Header */}
         <View
           style={{
-            flex: 1,
-            backgroundColor: "#FFFFFF",
-            padding: 20,
-            borderRadius: 20,
+            flexDirection: "row",
             alignItems: "center",
+            gap: 10,
+            marginTop: 10,
           }}
         >
-          <Ionicons
-            name="trophy-outline"
-            size={24}
-            color="#E6B800"
-          />
-
+          <Ionicons name="flame" size={28} color="#FF7A00" />
           <Text
             style={{
-              marginTop: 8,
-              color: "#6B7280",
-            }}
-          >
-            Best
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 26,
-              fontWeight: "700",
+              fontSize: 28,
+              fontWeight: "800",
               color: "#1B4332",
+              letterSpacing: -0.5,
             }}
           >
-            {bestStreak}
+            Your Streaks
           </Text>
         </View>
 
+        {/* Current Streak Hero Card */}
         <View
           style={{
-            flex: 1,
             backgroundColor: "#FFFFFF",
-            padding: 20,
-            borderRadius: 20,
+            marginTop: 28,
+            padding: 28, // Fixed: removed the duplicate 'paddingStyle: 24' line here
+            borderRadius: 32,
             alignItems: "center",
-          }}
-        >
-          <Ionicons
-            name="flag-outline"
-            size={24}
-            color="#4CAF50"
-          />
-
-          <Text
-            style={{
-              marginTop: 8,
-              color: "#6B7280",
-            }}
-          >
-            Next Goal
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 26,
-              fontWeight: "700",
-              color: "#1B4332",
-            }}
-          >
-            {nextGoal}
-          </Text>
-        </View>
-      </View>
-
-      {/* Progress */}
-      <View
-        style={{
-          backgroundColor: "#FFFFFF",
-          marginTop: 20,
-          padding: 20,
-          borderRadius: 24,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 18,
-            fontWeight: "600",
-            color: "#1B4332",
-            marginBottom: 14,
-          }}
-        >
-          Goal Progress
-        </Text>
-
-        <View
-          style={{
-            height: 14,
-            backgroundColor: "#E8F5E9",
-            borderRadius: 10,
-            overflow: "hidden",
+            shadowColor: "#1B4332",
+            shadowOffset: { width: 0, height: 10 },
+            shadowOpacity: 0.05,
+            shadowRadius: 20,
+            elevation: 3,
           }}
         >
           <View
             style={{
-              width: `${progress}%`,
-              height: "100%",
-              backgroundColor: "#4CAF50",
+              backgroundColor: "#FFF0E6",
+              padding: 12,
+              borderRadius: 50,
+              marginBottom: 12,
             }}
-          />
+          >
+            <Ionicons name="flame" size={32} color="#FF7A00" />
+          </View>
+
+          <Text
+            style={{
+              color: "#526E60",
+              fontSize: 15,
+              fontWeight: "600",
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+            }}
+          >
+            Current Streak
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 64,
+              fontWeight: "800",
+              color: "#1B4332",
+              lineHeight: 72,
+              marginTop: 4,
+            }}
+          >
+            {currentStreak}
+          </Text>
+
+          <Text
+            style={{
+              color: "#1B4332",
+              fontSize: 16,
+              fontWeight: "700",
+              opacity: 0.7,
+              marginTop: 2,
+            }}
+          >
+            Days Consistent
+          </Text>
         </View>
 
-        <Text
+        {/* Side-by-Side Stats Cards */}
+        <View style={{ flexDirection: "row", gap: 14, marginTop: 16 }}>
+          {/* Best Record Card */}
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#FFFFFF",
+              padding: 20,
+              borderRadius: 24,
+              shadowColor: "#1B4332",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.03,
+              shadowRadius: 10,
+              elevation: 2,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#FFFBEB",
+                padding: 8,
+                borderRadius: 50,
+                alignSelf: "flex-start",
+              }}
+            >
+              <Ionicons name="trophy" size={20} color="#FFB703" />
+            </View>
+            <Text
+              style={{
+                color: "#526E60",
+                marginTop: 12,
+                fontSize: 14,
+                fontWeight: "600",
+              }}
+            >
+              Best Record
+            </Text>
+            <Text
+              style={{
+                fontSize: 28,
+                fontWeight: "800",
+                color: "#1B4332",
+                marginTop: 2,
+              }}
+            >
+              {bestStreak} days
+            </Text>
+          </View>
+
+          {/* Next Target Card */}
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#FFFFFF",
+              padding: 20,
+              borderRadius: 24,
+              shadowColor: "#1B4332",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.03,
+              shadowRadius: 10,
+              elevation: 2,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#E8F5E9",
+                padding: 8,
+                borderRadius: 50,
+                alignSelf: "flex-start",
+              }}
+            >
+              <Ionicons name="flag" size={20} color="#4CAF50" />
+            </View>
+            <Text
+              style={{
+                color: "#526E60",
+                marginTop: 12,
+                fontSize: 14,
+                fontWeight: "600",
+              }}
+            >
+              Next Milestone
+            </Text>
+            <Text
+              style={{
+                fontSize: 28,
+                fontWeight: "800",
+                color: "#1B4332",
+                marginTop: 2,
+              }}
+            >
+              {nextGoal} days
+            </Text>
+          </View>
+        </View>
+
+        {/* Progress Tracker Card */}
+        <View
           style={{
-            marginTop: 12,
-            color: "#6B7280",
+            marginTop: 16,
+            backgroundColor: "#FFFFFF",
+            padding: 24,
+            borderRadius: 28,
+            shadowColor: "#1B4332",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.03,
+            shadowRadius: 10,
+            elevation: 2,
           }}
         >
-          {currentStreak} / {nextGoal} Days
-        </Text>
-      </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ fontSize: 16, fontWeight: "700", color: "#1B4332" }}>
+              Milestone Progress
+            </Text>
+            <Text style={{ color: "#526E60", fontWeight: "700", fontSize: 14 }}>
+              {currentStreak} / {nextGoal} Days
+            </Text>
+          </View>
+
+          {/* Custom Track Bar layout */}
+          <View
+            style={{
+              height: 12,
+              backgroundColor: "#E1EFE6",
+              borderRadius: 50,
+              overflow: "hidden",
+              marginTop: 16,
+            }}
+          >
+            <View
+              style={{
+                width: `${progress}%`,
+                height: "100%",
+                backgroundColor: "#4CAF50",
+                borderRadius: 50,
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

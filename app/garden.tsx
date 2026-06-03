@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import { useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -8,7 +8,6 @@ import { calculateCurrentStreak } from "../utils/streaks";
 import {
   getGrowthStage,
   getDaysToNextStage,
-  getNextStageName,
 } from "../utils/garden";
 
 export default function GardenScreen() {
@@ -28,216 +27,231 @@ export default function GardenScreen() {
 
   const stage = getGrowthStage(streak);
   const daysLeft = getDaysToNextStage(streak);
-  const nextStage = getNextStageName(streak);
 
   const progress =
     streak >= 100
       ? 100
-      : (() => {
-          if (streak <= 6) return (streak / 7) * 100;
-          if (streak <= 29) return (streak / 30) * 100;
-          if (streak <= 89) return (streak / 90) * 100;
-          if (streak <= 99) return (streak / 100) * 100;
-          return 100;
-        })();
+      : streak <= 6
+      ? (streak / 7) * 100
+      : streak <= 29
+      ? (streak / 30) * 100
+      : streak <= 89
+      ? (streak / 90) * 100
+      : streak <= 99
+      ? (streak / 100) * 100
+      : 100;
 
-  // 🌱 Icon mapping (temporary instead of images)
-  const getPlantIcon = () => {
+  // 🌿 Plant mood system (Kept intact with upgraded tailored brand colors)
+  const plant = (() => {
     if (streak === 0)
-      return { name: "sad-outline", color: "#A3A3A3" };
+      return { icon: "sad-outline", color: "#A3B899" };
     if (streak <= 6)
-      return { name: "leaf-outline", color: "#A3E635" };
+      return { icon: "leaf-outline", color: "#81C784" };
     if (streak <= 29)
-      return { name: "rose-outline", color: "#4ADE80" };
+      return { icon: "leaf", color: "#4CAF50" };
     if (streak <= 89)
-      return { name: "flower-outline", color: "#22C55E" };
+      return { icon: "flower-outline", color: "#2E7D32" };
     if (streak <= 99)
-      return { name: "leaf", color: "#16A34A" };
+      return { icon: "sparkles", color: "#1B4332" };
 
-    return { name: "sparkles", color: "#15803D" };
-  };
-
-  const plant = getPlantIcon();
+    return { icon: "rose", color: "#15803D" };
+  })();
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "#F6FFF7",
-        padding: 20,
-      }}
-    >
-      {/* Header */}
-      <Text
-        style={{
-          fontSize: 28,
-          fontWeight: "700",
-          color: "#14532D",
-          marginTop: 10,
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#E1EFE6" }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingTop: 20,
+          paddingBottom: 40,
         }}
       >
-        🌿 Your Garden
-      </Text>
-
-      {/* Plant Visual */}
-      <View
-        style={{
-          marginTop: 40,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#FFFFFF",
-          padding: 40,
-          borderRadius: 30,
-        }}
-      >
-        <Ionicons
-          name={plant.name as any}
-          size={120}
-          color={plant.color}
-        />
-
-        <Text
+        {/* Header Title */}
+        <View
           style={{
-            fontSize: 22,
-            fontWeight: "600",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
             marginTop: 10,
-            color: "#14532D",
           }}
         >
-          {stage}
-        </Text>
-
-        <Text
-          style={{
-            color: "#6B7280",
-            marginTop: 4,
-          }}
-        >
-          Current Streak: {streak} days
-        </Text>
-      </View>
-
-      {/* Stats */}
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: 20,
-          gap: 12,
-        }}
-      >
-        {/* Next Stage */}
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "#FFFFFF",
-            padding: 18,
-            borderRadius: 20,
-            alignItems: "center",
-          }}
-        >
-          <Ionicons name="trending-up-outline" size={24} color="#16A34A" />
-
+          <Ionicons name="leaf" size={26} color="#1B4332" />
           <Text
             style={{
-              marginTop: 6,
-              color: "#6B7280",
+              fontSize: 28,
+              fontWeight: "800",
+              color: "#1B4332",
+              letterSpacing: -0.5,
             }}
           >
-            Next Stage
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "700",
-              color: "#14532D",
-              textAlign: "center",
-              marginTop: 4,
-            }}
-          >
-            {nextStage}
+            Your Garden
           </Text>
         </View>
 
-        {/* Days Left */}
+        {/* Plant Display Centerpiece Card */}
         <View
           style={{
-            flex: 1,
             backgroundColor: "#FFFFFF",
-            padding: 18,
-            borderRadius: 20,
+            marginTop: 28,
+            paddingVertical: 36,
+            paddingHorizontal: 24,
+            borderRadius: 32,
             alignItems: "center",
+            shadowColor: "#1B4332",
+            shadowOffset: { width: 0, height: 10 },
+            shadowOpacity: 0.05,
+            shadowRadius: 20,
+            elevation: 3,
           }}
         >
-          <Ionicons name="time-outline" size={24} color="#F59E0B" />
+          {/* Circular frame for the plant icon */}
+          <View
+            style={{
+              backgroundColor: "#F4FFF6",
+              padding: 28,
+              borderRadius: 100,
+              borderWidth: 2,
+              borderColor: "#E8F5E9",
+              marginBottom: 16,
+            }}
+          >
+            <Ionicons name={plant.icon as any} size={100} color={plant.color} />
+          </View>
 
           <Text
             style={{
+              fontSize: 24,
+              fontWeight: "800",
+              color: "#1B4332",
+              letterSpacing: -0.3,
+            }}
+          >
+            {stage}
+          </Text>
+
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 6,
               marginTop: 6,
-              color: "#6B7280",
+              backgroundColor: "#FFF0E6",
+              paddingVertical: 4,
+              paddingHorizontal: 12,
+              borderRadius: 12,
             }}
           >
-            Days Left
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "700",
-              color: "#14532D",
-              marginTop: 4,
-            }}
-          >
-            {daysLeft}
-          </Text>
+            <Ionicons name="flame" size={14} color="#FF7A00" />
+            <Text
+              style={{
+                color: "#FF7A00",
+                fontSize: 13,
+                fontWeight: "700",
+              }}
+            >
+              {streak} Day Streak
+            </Text>
+          </View>
         </View>
-      </View>
 
-      {/* Progress Bar */}
-      <View
-        style={{
-          marginTop: 20,
-          backgroundColor: "#FFFFFF",
-          padding: 20,
-          borderRadius: 20,
-        }}
-      >
-        <Text
-          style={{
-            marginBottom: 10,
-            fontWeight: "600",
-            color: "#14532D",
-          }}
-        >
-          Growth Progress
-        </Text>
-
+        {/* Next Evolution Info Card */}
         <View
           style={{
-            height: 12,
-            backgroundColor: "#DCFCE7",
-            borderRadius: 10,
-            overflow: "hidden",
+            marginTop: 16,
+            backgroundColor: "#FFFFFF",
+            padding: 20,
+            borderRadius: 24,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            shadowColor: "#1B4332",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.03,
+            shadowRadius: 10,
+            elevation: 2,
+          }}
+        >
+          <View>
+            <Text style={{ color: "#526E60", fontSize: 14, fontWeight: "600" }}>
+              Next Evolution
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "800",
+                color: "#1B4332",
+                marginTop: 2,
+              }}
+            >
+              {daysLeft} days left
+            </Text>
+          </View>
+          <Text style={{ fontSize: 24 }}>🌱</Text>
+        </View>
+
+        {/* Growth Progress Tracker Card */}
+        <View
+          style={{
+            marginTop: 14,
+            backgroundColor: "#FFFFFF",
+            padding: 24,
+            borderRadius: 24,
+            shadowColor: "#1B4332",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.03,
+            shadowRadius: 10,
+            elevation: 2,
           }}
         >
           <View
             style={{
-              width: `${progress}%`,
-              height: "100%",
-              backgroundColor: "#22C55E",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 14,
             }}
-          />
-        </View>
+          >
+            <Text style={{ fontSize: 16, fontWeight: "700", color: "#1B4332" }}>
+              Growth Progress
+            </Text>
+            <Text style={{ color: "#526E60", fontWeight: "700", fontSize: 14 }}>
+              {Math.round(progress)}%
+            </Text>
+          </View>
 
-        <Text
-          style={{
-            marginTop: 8,
-            color: "#6B7280",
-          }}
-        >
-          {Math.round(progress)}% to next evolution
-        </Text>
-      </View>
+          {/* Upgraded Progress Track Slider layout */}
+          <View
+            style={{
+              height: 12,
+              backgroundColor: "#E1EFE6",
+              borderRadius: 50,
+              overflow: "hidden",
+            }}
+          >
+            <View
+              style={{
+                width: `${progress}%`,
+                height: "100%",
+                backgroundColor: "#4CAF50",
+                borderRadius: 50,
+              }}
+            />
+          </View>
+
+          <Text
+            style={{
+              marginTop: 12,
+              color: "#526E60",
+              fontSize: 13,
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            Nurture your daily habits to reach the next stage
+          </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
