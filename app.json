@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#FCE7F3"
       },
-      "package": "com.appdevsmriti.taskchecker"
+      "package": "com.smritiiii.dailygratitude"
     },
     "web": {
       "favicon": "./assets/images/icon.png"
