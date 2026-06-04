@@ -33,10 +33,10 @@ export default function HomeScreen() {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#E1EFE6" }}>
-      {/* Premium Ambient Soft Glow Background Layer */}
+    <View style={{ flex: 1, backgroundColor: "#0B1410" }}>
+      {/* Premium Ambient Dark Ecosystem Background Layer */}
       <LinearGradient
-        colors={["#D3EBE1", "#E1EFE6", "#F2F9F5"]}
+        colors={["#0E1E16", "#0B1410", "#070C09"]}
         locations={[0.0, 0.5, 1.0]}
         style={{
           position: "absolute",
@@ -47,9 +47,7 @@ export default function HomeScreen() {
         }}
       />
 
-      {/* Premium Dark Forest Green U-Shaped Curve (Inspired by image_e85af4.jpg)
-        Positioned dynamically behind the header and featured cards.
-      */}
+      {/* Overarching Deep Canopy Arch Geometry */}
       <View
         style={{
           position: "absolute",
@@ -58,12 +56,12 @@ export default function HomeScreen() {
           width: SCREEN_WIDTH * 1.5,
           height: SCREEN_WIDTH * 1.35,
           borderRadius: (SCREEN_WIDTH * 1.5) / 2,
-          backgroundColor: "#0B1912",
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 12 },
-          shadowOpacity: 0.15,
-          shadowRadius: 24,
-          elevation: 8,
+          backgroundColor: "#050C08",
+          shadowColor: "#10B981",
+          shadowOffset: { width: 0, height: 16 },
+          shadowOpacity: 0.05,
+          shadowRadius: 30,
+          elevation: 6,
         }}
       />
 
@@ -81,18 +79,17 @@ export default function HomeScreen() {
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              alignItems: "flex-start",
+              alignItems: "center",
               marginTop: 12,
             }}
           >
-            <View style={{ flex: 1 }}>            
+            <View style={{ flex: 1 }}>      
               <Text
                 style={{
                   fontSize: 34,
                   fontWeight: "900",
                   color: "#FFFFFF",
                   lineHeight: 40,
-                  marginTop: 12,
                   letterSpacing: -0.8,
                 }}
               >
@@ -100,59 +97,74 @@ export default function HomeScreen() {
               </Text>
             </View>
 
-            {/* Translucent Glass Pill Circle Decorative Box */}
+            {/* Glassmorphic Brand Accent Box */}
             <View
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                backgroundColor: "rgba(16, 185, 129, 0.12)",
                 padding: 12,
                 borderRadius: 50,
                 borderWidth: 1,
-                borderColor: "rgba(255, 255, 255, 0.25)",
+                borderColor: "rgba(16, 185, 129, 0.2)",
               }}
             >
-              <Ionicons name="leaf" size={22} color="#E1EFE6" />
+              <Ionicons name="leaf" size={22} color="#10B981" />
             </View>
           </View>
 
           {/* Featured Stats Hero Card */}
           <View
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#111C16",
               marginTop: 28,
-              borderRadius: 32,
+              borderRadius: 36,
               overflow: "hidden",
-              shadowColor: "#0B1912",
-              shadowOffset: { width: 0, height: 12 },
-              shadowOpacity: 0.08,
-              shadowRadius: 24,
-              elevation: 4,
+              borderWidth: 1,
+              borderColor: "rgba(16, 185, 129, 0.15)",
+              shadowColor: "#000000",
+              shadowOffset: { width: 0, height: 24 },
+              shadowOpacity: 0.3,
+              shadowRadius: 32,
+              elevation: 8,
               position: "relative",
             }}
           >
-            {/* The BIGGER Image Accent */}
-            <Image
-              source={require("../assets/images/seed-of-joy.png")}
-              style={{
-                position: "absolute",
-                top: 24, // Slightly lowered from the top boundary
-                right: 20,
-                width: 100, // Increased size to 100px
-                height: 100, // Increased size to 100px
-                borderRadius: 24, // Enhanced corner smoothing for a premium look
-              }}
-              resizeMode="cover"
+            {/* Ambient subtle light source overlay */}
+            <LinearGradient
+              colors={["rgba(16, 185, 129, 0.06)", "rgba(0, 0, 0, 0)"]}
+              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
             />
 
-            {/* Content container body 
-              Increased paddingRight to 125 so your typography has plenty of 
-              breathing room next to the larger image asset.
-            */}
-            <View style={{ padding: 24, paddingRight: 125 }}>
+            {/* The BIGGER Image Accent Container */}
+            <View
+              style={{
+                position: "absolute",
+                top: 24,
+                right: 20,
+                shadowColor: "#10B981",
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 0.15,
+                shadowRadius: 15,
+              }}
+            >
+              <Image
+                source={require("../assets/images/seed-of-joy.png")}
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 24,
+                  borderWidth: 1,
+                  borderColor: "rgba(255, 255, 255, 0.05)",
+                }}
+                resizeMode="cover"
+              />
+            </View>
+
+            <View style={{ padding: 24, paddingRight: 135 }}>
               <Text
                 style={{
-                  color: "#0B1912",
+                  color: "#FFFFFF",
                   fontSize: 22,
-                  fontWeight: "700",
+                  fontWeight: "800",
                   letterSpacing: -0.3,
                 }}
               >
@@ -160,8 +172,9 @@ export default function HomeScreen() {
               </Text>
               <Text
                 style={{
-                  color: "#5A6E62",
+                  color: "#80998C",
                   fontSize: 14,
+                  fontWeight: "600",
                   marginTop: 6,
                   lineHeight: 20,
                 }}
@@ -174,23 +187,25 @@ export default function HomeScreen() {
                   flexDirection: "row",
                   alignItems: "baseline",
                   marginTop: 20,
-                  gap: 6,
+                  gap: 8,
                 }}
               >
                 <Text
                   style={{
-                    fontSize: 44,
-                    fontWeight: "800",
-                    color: "#0B1912",
+                    fontSize: 46,
+                    fontWeight: "900",
+                    color: "#34D399",
                   }}
                 >
                   {gratitudes.length}
                 </Text>
                 <Text
                   style={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    color: "#5A6E62",
+                    fontSize: 15,
+                    fontWeight: "700",
+                    color: "#4B6B5B",
+                    textTransform: "uppercase",
+                    letterSpacing: 0.5,
                   }}
                 >
                   Total Entries
@@ -200,7 +215,7 @@ export default function HomeScreen() {
           </View>
           
 
-          {/* Timeline Header */}
+          {/* Timeline Header Section */}
           <View
             style={{
               flexDirection: "row",
@@ -212,9 +227,9 @@ export default function HomeScreen() {
           >
             <Text
               style={{
-                fontSize: 30,
-                fontWeight: "600",
-                color: "#75b193",
+                fontSize: 22,
+                fontWeight: "800",
+                color: "#10B981",
                 letterSpacing: -0.5,
               }}
             >
@@ -222,22 +237,25 @@ export default function HomeScreen() {
             </Text>
           </View>
 
-          {/* Empty State */}
+          {/* Empty State Layout */}
           {gratitudes.length === 0 && (
             <View
               style={{
-                backgroundColor: "#FFFFFF",
-                padding: 24,
-                borderRadius: 24,
+                backgroundColor: "#111C16",
+                padding: 32,
+                borderRadius: 28,
                 alignItems: "center",
+                borderWidth: 1,
+                borderColor: "rgba(255, 255, 255, 0.05)",
               }}
             >
-              <Ionicons name="flower-outline" size={32} color="#A6B8AD" />
+              <Ionicons name="flower-outline" size={36} color="#4A5D53" />
               <Text
                 style={{
-                  color: "#5A6E62",
-                  marginTop: 8,
-                  fontWeight: "500",
+                  color: "#80998C",
+                  marginTop: 10,
+                  fontWeight: "600",
+                  fontSize: 15,
                 }}
               >
                 No gratitude entries yet.
@@ -245,20 +263,22 @@ export default function HomeScreen() {
             </View>
           )}
 
-          {/* Timeline List */}
+          {/* Timeline Cards Grid List */}
           {gratitudes.map((item) => (
             <View
               key={item.id}
               style={{
-                backgroundColor: "#FFFFFF",
-                padding: 20,
-                borderRadius: 24,
-                marginBottom: 12,
-                shadowColor: "#0B1912",
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.02,
-                shadowRadius: 8,
-                elevation: 1,
+                backgroundColor: "#111C16",
+                padding: 24,
+                borderRadius: 28,
+                marginBottom: 14,
+                borderWidth: 1,
+                borderColor: "rgba(255, 255, 255, 0.04)",
+                shadowColor: "#000000",
+                shadowOffset: { width: 0, height: 6 },
+                shadowOpacity: 0.1,
+                shadowRadius: 10,
+                elevation: 2,
               }}
             >
               <View
@@ -266,29 +286,43 @@ export default function HomeScreen() {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  marginBottom: 10,
+                  marginBottom: 14,
                 }}
               >
-                <Text
+                {/* Modern structural metadata chip badge styling */}
+                <View
                   style={{
-                    color: "#5A6E62",
-                    fontWeight: "700",
-                    fontSize: 13,
-                    textTransform: "uppercase",
-                    letterSpacing: 0.5,
+                    backgroundColor: "rgba(255, 255, 255, 0.03)",
+                    paddingHorizontal: 12,
+                    paddingVertical: 4,
+                    borderRadius: 12,
+                    borderWidth: 1,
+                    borderColor: "rgba(255, 255, 255, 0.04)",
                   }}
                 >
-                  {item.date}
-                </Text>
-                <Ionicons name="bookmark-outline" size={16} color="#b3eeca" />
+                  <Text
+                    style={{
+                      color: "#607368",
+                      fontWeight: "800",
+                      fontSize: 11,
+                      textTransform: "uppercase",
+                      letterSpacing: 1.2,
+                    }}
+                  >
+                    {item.date}
+                  </Text>
+                </View>
+                <Ionicons name="bookmark" size={14} color="#3D5247" />
               </View>
 
+              {/* High-end editorial entry copy display text layout */}
               <Text
                 style={{
-                  color: "#0B1912",
-                  fontSize: 15,
-                  lineHeight: 22,
+                  color: "#E2E8F0",
+                  fontSize: 16,
+                  lineHeight: 26,
                   fontWeight: "500",
+                  letterSpacing: -0.1,
                 }}
               >
                 {item.text}

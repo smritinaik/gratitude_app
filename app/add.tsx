@@ -2,17 +2,21 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import {
+  Dimensions,
   SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient"; // Import matching the premium ecosystem theme
 
 import {
   getTodayGratitude,
   saveTodayGratitude,
 } from "../utils/storage";
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function AddScreen() {
   const [gratitude, setGratitude] = useState("");
@@ -56,70 +60,141 @@ export default function AddScreen() {
     .filter(Boolean).length;
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "#E1EFE6", // Matching the background with the updated Home Screen
-        paddingHorizontal: 24,
-        paddingTop: 20,
-      }}
-    >
-      {/* Header */}
+    <View style={{ flex: 1, backgroundColor: "#0B1410" }}>
+      {/* Premium Dark Botanical Background Layer */}
+      <LinearGradient
+        colors={["#0E1E16", "#0B1410", "#070C09"]}
+        locations={[0.0, 0.5, 1.0]}
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: "100%",
+        }}
+      />
+
+      {/* Overarching Canopy Top Arch Ring Decorator */}
       <View
         style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 10,
-          marginTop: 10,
-          marginBottom: 16,
+          position: "absolute",
+          top: -SCREEN_WIDTH * 0.45,
+          left: -(SCREEN_WIDTH * 0.25),
+          width: SCREEN_WIDTH * 1.5,
+          height: SCREEN_WIDTH * 1.3,
+          borderRadius: (SCREEN_WIDTH * 1.5) / 2,
+          backgroundColor: "#050C08",
+          shadowColor: "#10B981",
+          shadowOffset: { width: 0, height: 16 },
+          shadowOpacity: 0.05,
+          shadowRadius: 30,
+          elevation: 6,
+        }}
+      />
+
+      <SafeAreaView
+        style={{
+          flex: 1,
+          paddingHorizontal: 24,
+          paddingTop: 20,
         }}
       >
-        <Ionicons name="sparkles" size={24} color="#1B4332" />
-
-        <Text
-          style={{
-            fontSize: 28,
-            fontWeight: "800",
-            color: "#1B4332",
-            letterSpacing: -0.5,
-          }}
-        >
-          Daily Seed
-        </Text>
-      </View>
-
-      {/* Already Added Today View State */}
-      {hasTodayGratitude && !isEditing ? (
+        {/* Header layout structure */}
         <View
           style={{
-            backgroundColor: "#FFFFFF",
-            padding: 24,
-            borderRadius: 28,
+            flexDirection: "row",
+            justifyContent: "space-between",
             alignItems: "center",
-            shadowColor: "#1B4332",
-            shadowOffset: { width: 0, height: 6 },
-            shadowOpacity: 0.05,
-            shadowRadius: 15,
-            elevation: 2,
+            marginTop: 12,
+            marginBottom: 24,
           }}
         >
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+            <View
+              style={{
+                backgroundColor: "rgba(16, 185, 129, 0.12)",
+                padding: 10,
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: "rgba(16, 185, 129, 0.2)",
+              }}
+            >
+              <Ionicons name="sparkles" size={24} color="#10B981" />
+            </View>
+
+            <Text
+              style={{
+                fontSize: 32,
+                fontWeight: "900",
+                color: "#FFFFFF",
+                letterSpacing: -0.8,
+              }}
+            >
+              Daily Seed
+            </Text>
+          </View>
+
+          {/* Micro structural status marker */}
           <View
             style={{
-              backgroundColor: "#E8F5E9",
-              padding: 12,
-              borderRadius: 50,
-              marginBottom: 16,
+              backgroundColor: "rgba(255, 255, 255, 0.04)",
+              paddingVertical: 6,
+              paddingHorizontal: 12,
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
             }}
           >
-            <Ionicons name="checkmark-circle" size={32} color="#4CAF50" />
+            <Text style={{ color: "#80998C", fontSize: 12, fontWeight: "700", letterSpacing: 0.5 }}>
+              CULTIVATE
+            </Text>
           </View>
+        </View>
+
+        {/* Already Added Today View State */}
+        {hasTodayGratitude && !isEditing ? (
+          <View
+            style={{
+              backgroundColor: "#111C16",
+              padding: 28,
+              borderRadius: 36,
+              alignItems: "center",
+              borderWidth: 1,
+              borderColor: "rgba(16, 185, 129, 0.15)",
+              shadowColor: "#000000",
+              shadowOffset: { width: 0, height: 24 },
+              shadowOpacity: 0.3,
+              shadowRadius: 32,
+              elevation: 8,
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <LinearGradient
+              colors={["rgba(16, 185, 129, 0.06)", "rgba(0, 0, 0, 0)"]}
+              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+            />
+
+            <View
+              style={{
+                backgroundColor: "rgba(16, 185, 129, 0.12)",
+                padding: 16,
+                borderRadius: 100,
+                borderWidth: 1,
+                borderColor: "rgba(16, 185, 129, 0.25)",
+                marginBottom: 20,
+              }}
+            >
+              <Ionicons name="checkmark-circle" size={40} color="#34D399" />
+            </View>
 
           <Text
             style={{
-              fontSize: 20,
-              fontWeight: "700",
-              color: "#1B4332",
+              fontSize: 22,
+              fontWeight: "900",
+              color: "#FFFFFF",
               textAlign: "center",
+              letterSpacing: -0.3,
             }}
           >
             Your entry has been planted!
@@ -127,10 +202,12 @@ export default function AddScreen() {
 
           <Text
             style={{
-              marginTop: 6,
-              color: "#526E60",
+              marginTop: 8,
+              color: "#80998C",
               fontSize: 14,
+              fontWeight: "600",
               textAlign: "center",
+              lineHeight: 20,
             }}
           >
             Come back tomorrow to keep growing your garden. 🌱
@@ -139,20 +216,20 @@ export default function AddScreen() {
           {/* User's Text Display Container */}
           <View
             style={{
-              backgroundColor: "#FFFDF5",
-              marginTop: 24,
-              padding: 20,
-              borderRadius: 20,
+              backgroundColor: "#09100C",
+              marginTop: 28,
+              padding: 24,
+              borderRadius: 24,
               width: "100%",
               borderWidth: 1,
-              borderColor: "#F3E8D0",
+              borderColor: "rgba(255, 255, 255, 0.04)",
             }}
           >
             <Text
               style={{
-                fontSize: 16,
-                color: "#2D3A34",
-                lineHeight: 24,
+                fontSize: 17,
+                color: "#E2E8F0",
+                lineHeight: 28,
                 fontWeight: "500",
                 fontStyle: "italic",
               }}
@@ -163,22 +240,28 @@ export default function AddScreen() {
 
           <TouchableOpacity
             onPress={() => setIsEditing(true)}
-            activeOpacity={0.8}
+            activeOpacity={0.85}
             style={{
-              marginTop: 24,
-              backgroundColor: "#1B4332",
+              marginTop: 28,
+              backgroundColor: "#10B981",
               width: "100%",
-              height: 56,
-              borderRadius: 20,
+              height: 58,
+              borderRadius: 22,
               justifyContent: "center",
               alignItems: "center",
+              shadowColor: "#10B981",
+              shadowOffset: { width: 0, height: 8 },
+              shadowOpacity: 0.2,
+              shadowRadius: 16,
+              elevation: 4,
             }}
           >
             <Text
               style={{
-                color: "#FFFFFF",
-                fontWeight: "700",
+                color: "#042F1A",
+                fontWeight: "800",
                 fontSize: 16,
+                letterSpacing: 0.2,
               }}
             >
               Edit Today's Entry
@@ -189,37 +272,40 @@ export default function AddScreen() {
         <>
           <Text
             style={{
-              color: "#526E60",
+              color: "#80998C",
               marginBottom: 24,
               fontSize: 15,
-              fontWeight: "500",
+              fontWeight: "600",
+              lineHeight: 22,
             }}
           >
             Take a slow deep breath, focus on one positive thing from your day.
           </Text>
 
-          {/* Main Paper Textarea Container */}
+          {/* Main Glassmorphic Input Textarea Box Container */}
           <View
             style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: 28,
+              backgroundColor: "#111C16",
+              borderRadius: 32,
               padding: 24,
-              height: 300,
-              shadowColor: "#1B4332",
-              shadowOffset: { width: 0, height: 6 },
-              shadowOpacity: 0.04,
-              shadowRadius: 16,
-              elevation: 2,
+              height: 320,
+              borderWidth: 1,
+              borderColor: "rgba(255, 255, 255, 0.05)",
+              shadowColor: "#000000",
+              shadowOffset: { width: 0, height: 12 },
+              shadowOpacity: 0.2,
+              shadowRadius: 20,
+              elevation: 4,
             }}
           >
             <Text
               style={{
-                fontSize: 16,
-                fontWeight: "700",
-                color: "#A3B899",
+                fontSize: 13,
+                fontWeight: "800",
+                color: "#4B6B5B",
                 textTransform: "uppercase",
-                letterSpacing: 0.5,
-                marginBottom: 12,
+                letterSpacing: 0.8,
+                marginBottom: 14,
               }}
             >
               Today I am grateful for...
@@ -233,12 +319,12 @@ export default function AddScreen() {
               numberOfLines={6}
               textAlignVertical="top"
               placeholder="Write about a small moment, a helpful person, or a safe space..."
-              placeholderTextColor="#A3A3A3"
+              placeholderTextColor="#4A5D53"
               style={{
                 flex: 1,
                 fontSize: 17,
                 lineHeight: 28,
-                color: "#1B4332",
+                color: "#FFFFFF",
                 fontWeight: "500",
               }}
             />
@@ -246,17 +332,17 @@ export default function AddScreen() {
             <View
               style={{
                 borderTopWidth: 1,
-                borderTopColor: "#EFEFEF",
-                paddingTop: 12,
+                borderTopColor: "rgba(255, 255, 255, 0.04)",
+                paddingTop: 14,
                 flexDirection: "row",
                 justifyContent: "flex-end",
               }}
             >
               <Text
                 style={{
-                  color: wordCount > 100 ? "#D93838" : "#526E60",
+                  color: wordCount > 100 ? "#EF4444" : "#607368",
                   fontSize: 13,
-                  fontWeight: "600",
+                  fontWeight: "700",
                 }}
               >
                 {wordCount} / 100 words
@@ -264,30 +350,33 @@ export default function AddScreen() {
             </View>
           </View>
 
-          {/* Action Save Button */}
+          {/* Dynamic Action Submission Control */}
           <TouchableOpacity
             onPress={handleSave}
             disabled={!gratitude.trim()}
-            activeOpacity={0.8}
+            activeOpacity={0.85}
             style={{
-              backgroundColor: gratitude.trim() ? "#1B4332" : "#B2C7BC",
-              height: 56,
-              borderRadius: 20,
+              backgroundColor: gratitude.trim() ? "#10B981" : "#14251D",
+              height: 58,
+              borderRadius: 22,
               justifyContent: "center",
               alignItems: "center",
-              marginTop: 20,
-              shadowColor: "#1B4332",
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: gratitude.trim() ? 0.15 : 0,
-              shadowRadius: 8,
-              elevation: 2,
+              marginTop: 24,
+              borderWidth: gratitude.trim() ? 0 : 1,
+              borderColor: "rgba(255, 255, 255, 0.02)",
+              shadowColor: "#10B981",
+              shadowOffset: { width: 0, height: 8 },
+              shadowOpacity: gratitude.trim() ? 0.2 : 0,
+              shadowRadius: 16,
+              elevation: gratitude.trim() ? 4 : 0,
             }}
           >
             <Text
               style={{
-                color: "#FFFFFF",
+                color: gratitude.trim() ? "#042F1A" : "#3D5247",
                 fontSize: 16,
-                fontWeight: "700",
+                fontWeight: "800",
+                letterSpacing: 0.2,
               }}
             >
               {hasTodayGratitude ? "Save Changes" : "Plant Entry"}
@@ -296,5 +385,6 @@ export default function AddScreen() {
         </>
       )}
     </SafeAreaView>
+  </View>
   );
 }
