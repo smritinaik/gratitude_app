@@ -7,7 +7,7 @@
 </p>
 
 
-# 🌱 Gratitude Garden
+# 🌱 Daily Gratitude App
 
 A beautifully designed gratitude journaling app built with **React Native**, **Expo**, and **AsyncStorage** that helps users build a daily gratitude habit while growing a virtual plant through consistency.
 
