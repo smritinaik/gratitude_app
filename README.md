@@ -91,22 +91,5 @@ npm install
 npx expo start
 ```
 
-## 🎯 Future Improvements
-
-* Cloud backup and sync
-* Multiple themes
-* Gratitude reminders
-* Plant animations
-* Export gratitude journal as PDF
-* Achievement badges
-* Monthly insights and analytics
-
-
-## 🤝 Contributing
-
-Contributions, ideas, and feedback are always welcome.
-
-
----
 
 Built with ❤️ to encourage mindfulness, positivity, and consistency.
