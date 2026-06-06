@@ -11,6 +11,15 @@
 
 A beautifully designed gratitude journaling app built with **React Native**, **Expo**, and **AsyncStorage** that helps users build a daily gratitude habit while growing a virtual plant through consistency.
 
+## 🛠️ Tech Stack
+
+![React Native](https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Expo Router](https://img.shields.io/badge/Expo%20Router-000000?style=for-the-badge&logo=expo&logoColor=white)
+![AsyncStorage](https://img.shields.io/badge/AsyncStorage-4CAF50?style=for-the-badge)
+
+
 ## ✨ Overview
 
 Gratitude Garden transforms daily reflection into a rewarding experience. Every day, users can write one gratitude entry and maintain their streak. As streaks grow, their virtual plant evolves through different growth stages, encouraging mindfulness and consistency.
@@ -31,16 +40,6 @@ Your plant grows based on your consistency:
 
 Miss a day and your plant begins to wither, encouraging daily reflection.
 
-
-## 🛠️ Tech Stack
-
-* React Native
-* Expo
-* TypeScript
-* Expo Router
-* AsyncStorage
-* Expo Linear Gradient
-* Expo Vector Icons
 
 ## 📂 Project Structure
 
